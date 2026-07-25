@@ -3,11 +3,11 @@ version: 0.2
 phases: 
   install:
     commands:
-      -echo "Starting build..."
+      - echo "Starting build..."
 
   pre_build:
     commands:
-      -echo "Validating website..."
+      - echo "Validating website..."
       -test -f index.html || { echo "index.html not found!"; exit 1; }
       -test -f page2.html || { echo "page2.html not found!"; exit 1; }
       -test -f page3.html || { echo "page3.html not found!"; exit 1; }
@@ -18,7 +18,7 @@ phases:
 
   build:
     commands:
-      -echo "Synching files to S3 bucket..."
+      - echo "Synching files to S3 bucket..."
       -aws s# sync . s3://www.csce412ernest01.me --delete --exclude ".git/*"
 
   post_build:
