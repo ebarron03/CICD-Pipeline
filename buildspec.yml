@@ -1,6 +1,6 @@
 version: 0.2
 
-phases: 
+phases:
   install:
     commands:
       - echo "Starting build..."
@@ -8,24 +8,23 @@ phases:
   pre_build:
     commands:
       - echo "Validating website..."
-      -test -f index.html || { echo "index.html not found!"; exit 1; }
-      -test -f page2.html || { echo "page2.html not found!"; exit 1; }
-      -test -f page3.html || { echo "page3.html not found!"; exit 1; }
-      -test -f page4.html || { echo "page4.html not found!"; exit 1; }
-      -test -f style.css || { echo "style.css file not found!"; exit 1; }
-      -test -f style2.css || { echo "style2.css file not found!"; exit 1; }
-      -test -f functions.js || { echo "functions.js file not found!"; exit 1; }
+      - test -f index.html || { echo "index.html not found!"; exit 1; }
+      - test -f page2.html || { echo "page2.html not found!"; exit 1; }
+      - test -f page3.html || { echo "page3.html not found!"; exit 1; }
+      - test -f page4.html || { echo "page4.html not found!"; exit 1; }
+      - test -f style.css || { echo "style.css file not found!"; exit 1; }
+      - test -f style2.css || { echo "style2.css file not found!"; exit 1; }
+      - test -f functions.js || { echo "functions.js file not found!"; exit 1; }
 
   build:
     commands:
-      - echo "Synching files to S3 bucket..."
-      -aws s# sync . s3://www.csce412ernest01.me --delete --exclude ".git/*"
+      - echo "Syncing files to S3 bucket..."
+      - aws s3 sync . s3://www.csce412ernest01.me --delete --exclude ".git/*"
 
   post_build:
     commands:
-      -echo "Build completed successfully!"
+      - echo "Build completed successfully!"
 
 artifacts:
   files:
     - '**/*'
-
